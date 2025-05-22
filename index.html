@@ -1037,114 +1037,25 @@
     });
     </script>
 <script>
-// Asegúrate de que este script se ejecute después de que el DOM esté completamente cargado
-// o colócalo al final del body. window.onload es una forma de asegurar esto.
+<div id="commentsSection"></div>
 
+<script>
 async function loadComments() {
-    // Identificador único para los comentarios de este artículo específico
-    // Esto es importante si tienes múltiples artículos con comentarios.
-    // Por ahora, asumimos un solo 'comments.json' general o que la lógica
-    // para diferenciar artículos está en otro lado (o se añadirá).
-    // El ejemplo original usa un solo /comments.json
-    const articleId = "articulo-detalle-1"; // O una forma de obtener el ID del artículo actual
+    const response = await fetch("/comments.json");
+    const comments = await response.json();
 
-    try {
-        // Idealmente, la URL del JSON debería ser específica del artículo si tienes varios.
-        // const response = await fetch(`/comments-${articleId}.json`);
-        // Pero siguiendo el ejemplo:
-        const response = await fetch("/comments.json"); 
-        
-        if (!response.ok) {
-            // Si comments.json no existe (ej. primer uso), no es un error fatal,
-            // simplemente no hay comentarios que mostrar.
-            if (response.status === 404) {
-                console.log("No comments file found (comments.json). Starting fresh.");
-                document.getElementById("commentsSection").innerHTML = "<p data-lang-spa='No hay comentarios aún. ¡Sé el primero!' data-lang-swe='Inga kommentarer än. Bli den första!'>No hay comentarios aún. ¡Sé el primero!</p>";
-                // Aquí podrías llamar a tu función de cambio de idioma si la tienes
-                // para traducir este mensaje si es necesario.
-                return;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const comments = await response.json();
-
-        const commentsSection = document.getElementById("commentsSection"); // Asegúrate que este ID existe y es único por artículo si es necesario.
-        if (comments.length === 0) {
-            commentsSection.innerHTML = "<p data-lang-spa='No hay comentarios aún. ¡Sé el primero!' data-lang-swe='Inga kommentarer än. Bli den första!'>No hay comentarios aún. ¡Sé el primero!</p>";
-        } else {
-            commentsSection.innerHTML = comments.map(c => `
-                <div class="comment">
-                    <p><strong>${escapeHTML(c.name)}</strong> <span data-lang-spa="dijo:" data-lang-swe="sa:">dijo:</span></p>
-                    <p>${escapeHTML(c.comment)}</p>
-                    <small>${new Date(c.date).toLocaleString()}</small>
-                </div>
-            `).join("");
-        }
-        // Aquí podrías llamar a tu función de cambio de idioma si la tienes
-        // para traducir los "dijo:" y los mensajes de "No hay comentarios".
-    } catch (error) {
-        console.error("Error al cargar los comentarios:", error);
-        const commentsSection = document.getElementById("commentsSection");
-        if (commentsSection) {
-            commentsSection.innerHTML = "<p data-lang-spa='Error al cargar comentarios.' data-lang-swe='Fel vid laddning av kommentarer.'>Error al cargar comentarios.</p>";
-        }
-    }
+    const commentsSection = document.getElementById("commentsSection");
+    commentsSection.innerHTML = comments.map(c => `
+        <div class="comment">
+            <p><strong>${c.name}</strong> dijo:</p>
+            <p>${c.comment}</p>
+            <small>${new Date(c.date).toLocaleString()}</small>
+        </div>
+    `).join("");
 }
 
-function escapeHTML(str) {
-    var p = document.createElement("p");
-    p.appendChild(document.createTextNode(str));
-    return p.innerHTML;
-}
-
-// Cargar los comentarios cuando la página (o esta sección si es cargada dinámicamente) se abre/muestra
-// Si la sección de detalle se muestra/oculta con JS, querrás llamar a loadComments()
-// cada vez que se muestre #articulo-detalle-1
-// Por ahora, window.onload es un inicio general.
-// Si tienes una función que muestra el detalle del artículo, llama a loadComments() dentro de esa función.
-// Ejemplo:
-// document.querySelectorAll('.view-articulo-detalle').forEach(link => {
-//   link.addEventListener('click', event => {
-//     // ... tu lógica para mostrar el div de detalle ...
-//     if (event.target.href.includes('#articulo-detalle-1')) { // o alguna otra condición
-//       loadComments(); 
-//     }
-//   });
-// });
-
-// Como fallback, si no hay una lógica más específica para cargar al mostrar:
-window.addEventListener('load', () => {
-    // Solo cargar si la sección de comentarios es visible o relevante
-    // En tu caso, el detalle del artículo está inicialmente oculto (style="display:none;")
-    // por lo que window.onload podría no ser el mejor momento si el usuario no navega al detalle.
-    // Una mejor aproximación es llamar a loadComments() cuando el #articulo-detalle-1 se hace visible.
-    // Por simplicidad, el ejemplo original usa window.onload.
-    
-    // Vamos a intentar cargarlos si el hash corresponde o si es la carga inicial y no hay hash
-    if (window.location.hash === "#articulo-detalle-1" || !window.location.hash) {
-        // Si el detalle del artículo es visible por defecto o por hash en URL
-        if(document.getElementById('articulo-detalle-1') && document.getElementById('articulo-detalle-1').style.display !== 'none') {
-            loadComments();
-        }
-    }
-
-    // Para manejar clics en "Leer más" y cargar comentarios cuando se muestra el detalle:
-    document.querySelectorAll('.view-articulo-detalle').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href').substring(1); // e.g., "articulo-detalle-1"
-            if (targetId === "articulo-detalle-1") { // O generalizar para cualquier artículo
-                 // Asumimos que tu lógica para mostrar/ocultar el detalle ya se ejecutó o se ejecutará.
-                 // Damos un pequeño tiempo para que el div se haga visible si es asíncrono.
-                setTimeout(loadComments, 100); // Ajusta el tiempo si es necesario
-            }
-        });
-    });
-});
-
-// Si tienes una función global para cambiar idioma, querrás llamarla después de cargar los comentarios
-// para traducir los textos dinámicos como "dijo:", "No hay comentarios...", etc.
-
+// Cargar los comentarios cuando la página se abre
+window.onload = loadComments;
 </script>
 </body>
 </html>

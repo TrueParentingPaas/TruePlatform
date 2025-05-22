@@ -736,21 +736,37 @@
                             <p data-lang-spa="Con cariño," data-lang-swe="Med vänlig hälsning,">Con cariño,</p>
                             <p data-lang-spa="Marleny" data-lang-swe="Marleny">Marleny</p>
                             
-                            <div class="comments-section">
-                                <h3 data-lang-spa="Comentarios - 22 maneras de ayudar a los niños a amar la lectura" data-lang-swe="Kommentarer - 22 sätt att hjälpa barn att älska att läsa">Comentarios - 22 maneras de ayudar a los niños a amar la lectura</h3>
-                                <div class="comment">
-                                    <strong>Sandra Román</strong>
-                                    <p data-lang-spa="Gracias por esta maravillosa herramienta de aprendizaje que nos ofreces. El plan de transcripción es de gran bendición. Dios te bendiga!" data-lang-swe="Tack för detta underbara lärverktyg du erbjuder oss. Transkriptionsplanen är en stor välsignelse. Gud välsigne dig!">Gracias por esta maravillosa herramienta de aprendizaje que nos ofreces. El plan de transcripción es de gran bendición. Dios te bendiga!</p>
-                                </div>
-                                <!-- ... more comments, ideally with translations ... -->
+                                               <div class="comments-section">
+                        <h3 data-lang-spa="Comentarios - 22 maneras de ayudar a los niños a amar la lectura" data-lang-swe="Kommentarer - 22 sätt att hjälpa barn att älska att läsa">Comentarios - 22 maneras de ayudar a los niños a amar la lectura</h3>
+                        
+                        
+                        <div id="commentsSection">
+                            <!-- Los comentarios se cargarán aquí por JavaScript -->
+                        </div>
 
-                                <h3 data-lang-spa="¡Únete a la conversación!" data-lang-swe="Delta i konversationen!">¡Únete a la conversación!</h3>
-                                <form class="comment-form">
-                                    <input type="text" placeholder="Nombre" required data-lang-spa-placeholder="Nombre" data-lang-swe-placeholder="Namn">
-                                    <input type="email" placeholder="Correo electrónico" required data-lang-spa-placeholder="Correo electrónico" data-lang-swe-placeholder="E-post">
-                                    <textarea placeholder="Comentario" required data-lang-spa-placeholder="Comentario" data-lang-swe-placeholder="Kommentar"></textarea>
-                                    <button type="submit" class="btn btn-primary" data-lang-spa="Enviar comentario" data-lang-swe="Skicka kommentar">Enviar comentario</button>
-                                </form>
+                        <h3 data-lang-spa="¡Únete a la conversación!" data-lang-swe="Delta i konversationen!">¡Únete a la conversación!</h3>
+                        
+                        <!-- PASO 1: Formulario modificado -->
+                        <form name="comments" method="POST" data-netlify="true" id="commentForm" class="comment-form">
+                            <input type="hidden" name="form-name" value="comments" /> <!-- Campo oculto para Netlify si el 'name' del form no es suficiente -->
+                            <input type="text" name="name" placeholder="Nombre" required 
+                                data-lang-spa-placeholder="Nombre" 
+                                data-lang-swe-placeholder="Namn">
+                            
+                            <input type="email" name="email" placeholder="Correo electrónico" required 
+                                data-lang-spa-placeholder="Correo electrónico" 
+                                data-lang-swe-placeholder="E-post">
+                            
+                            <textarea name="comment" placeholder="Comentario" required 
+                                data-lang-spa-placeholder="Comentario" 
+                                data-lang-swe-placeholder="Kommentar"></textarea>
+                            
+                            <button type="submit" class="btn btn-primary" data-lang-spa="Enviar comentario" data-lang-swe="Skicka kommentar">
+                                Enviar comentario
+                            </button>
+                        </form>
+                    </div>
+                </div>
                             </div>
                         </div>
                         <!-- Placeholder for other articles detail -->
@@ -822,12 +838,25 @@
                 <div class="content-block">
                     <h2 data-lang-spa="Contacto" data-lang-swe="Kontakt">Contacto</h2>
                     <p data-lang-spa="Si tienes alguna pregunta o quieres ponerte en contacto con nosotros, completa el formulario a continuación." data-lang-swe="Om du har några frågor eller vill kontakta oss, fyll i formuläret nedan.">Información de contacto y formulario (no visible en screenshots, así que es un placeholder).</p>
-                    <form>
-                        <input type="text" placeholder="Tu Nombre" required data-lang-spa-placeholder="Tu Nombre" data-lang-swe-placeholder="Ditt namn">
-                        <input type="email" placeholder="Tu Email" required data-lang-spa-placeholder="Tu Email" data-lang-swe-placeholder="Din e-post">
-                        <textarea placeholder="Tu Mensaje" required data-lang-spa-placeholder="Tu Mensaje" data-lang-swe-placeholder="Ditt meddelande" style="width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height:120px;"></textarea>
-                        <button type="submit" class="btn btn-primary" data-lang-spa="Enviar Mensaje" data-lang-swe="Skicka meddelande">Enviar Mensaje</button>
-                    </form>
+                    <form name="contact" method="POST" data-netlify="true">
+    <input type="text" name="name" placeholder="Tu Nombre" required 
+        data-lang-spa-placeholder="Tu Nombre" 
+        data-lang-swe-placeholder="Ditt namn">
+    
+    <input type="email" name="email" placeholder="Tu Email" required 
+        data-lang-spa-placeholder="Tu Email" 
+        data-lang-swe-placeholder="Din e-post">
+    
+    <textarea name="message" placeholder="Tu Mensaje" required 
+        data-lang-spa-placeholder="Tu Mensaje" 
+        data-lang-swe-placeholder="Ditt meddelande"
+        style="width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height:120px;"></textarea>
+    
+    <button type="submit" class="btn btn-primary" data-lang-spa="Enviar Mensaje" data-lang-swe="Skicka meddelande">
+        Enviar Mensaje
+    </button>
+</form>
+
                 </div>
             </div>
         </section>
@@ -1007,6 +1036,115 @@
 
     });
     </script>
+<script>
+// Asegúrate de que este script se ejecute después de que el DOM esté completamente cargado
+// o colócalo al final del body. window.onload es una forma de asegurar esto.
 
+async function loadComments() {
+    // Identificador único para los comentarios de este artículo específico
+    // Esto es importante si tienes múltiples artículos con comentarios.
+    // Por ahora, asumimos un solo 'comments.json' general o que la lógica
+    // para diferenciar artículos está en otro lado (o se añadirá).
+    // El ejemplo original usa un solo /comments.json
+    const articleId = "articulo-detalle-1"; // O una forma de obtener el ID del artículo actual
+
+    try {
+        // Idealmente, la URL del JSON debería ser específica del artículo si tienes varios.
+        // const response = await fetch(`/comments-${articleId}.json`);
+        // Pero siguiendo el ejemplo:
+        const response = await fetch("/comments.json"); 
+        
+        if (!response.ok) {
+            // Si comments.json no existe (ej. primer uso), no es un error fatal,
+            // simplemente no hay comentarios que mostrar.
+            if (response.status === 404) {
+                console.log("No comments file found (comments.json). Starting fresh.");
+                document.getElementById("commentsSection").innerHTML = "<p data-lang-spa='No hay comentarios aún. ¡Sé el primero!' data-lang-swe='Inga kommentarer än. Bli den första!'>No hay comentarios aún. ¡Sé el primero!</p>";
+                // Aquí podrías llamar a tu función de cambio de idioma si la tienes
+                // para traducir este mensaje si es necesario.
+                return;
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const comments = await response.json();
+
+        const commentsSection = document.getElementById("commentsSection"); // Asegúrate que este ID existe y es único por artículo si es necesario.
+        if (comments.length === 0) {
+            commentsSection.innerHTML = "<p data-lang-spa='No hay comentarios aún. ¡Sé el primero!' data-lang-swe='Inga kommentarer än. Bli den första!'>No hay comentarios aún. ¡Sé el primero!</p>";
+        } else {
+            commentsSection.innerHTML = comments.map(c => `
+                <div class="comment">
+                    <p><strong>${escapeHTML(c.name)}</strong> <span data-lang-spa="dijo:" data-lang-swe="sa:">dijo:</span></p>
+                    <p>${escapeHTML(c.comment)}</p>
+                    <small>${new Date(c.date).toLocaleString()}</small>
+                </div>
+            `).join("");
+        }
+        // Aquí podrías llamar a tu función de cambio de idioma si la tienes
+        // para traducir los "dijo:" y los mensajes de "No hay comentarios".
+    } catch (error) {
+        console.error("Error al cargar los comentarios:", error);
+        const commentsSection = document.getElementById("commentsSection");
+        if (commentsSection) {
+            commentsSection.innerHTML = "<p data-lang-spa='Error al cargar comentarios.' data-lang-swe='Fel vid laddning av kommentarer.'>Error al cargar comentarios.</p>";
+        }
+    }
+}
+
+function escapeHTML(str) {
+    var p = document.createElement("p");
+    p.appendChild(document.createTextNode(str));
+    return p.innerHTML;
+}
+
+// Cargar los comentarios cuando la página (o esta sección si es cargada dinámicamente) se abre/muestra
+// Si la sección de detalle se muestra/oculta con JS, querrás llamar a loadComments()
+// cada vez que se muestre #articulo-detalle-1
+// Por ahora, window.onload es un inicio general.
+// Si tienes una función que muestra el detalle del artículo, llama a loadComments() dentro de esa función.
+// Ejemplo:
+// document.querySelectorAll('.view-articulo-detalle').forEach(link => {
+//   link.addEventListener('click', event => {
+//     // ... tu lógica para mostrar el div de detalle ...
+//     if (event.target.href.includes('#articulo-detalle-1')) { // o alguna otra condición
+//       loadComments(); 
+//     }
+//   });
+// });
+
+// Como fallback, si no hay una lógica más específica para cargar al mostrar:
+window.addEventListener('load', () => {
+    // Solo cargar si la sección de comentarios es visible o relevante
+    // En tu caso, el detalle del artículo está inicialmente oculto (style="display:none;")
+    // por lo que window.onload podría no ser el mejor momento si el usuario no navega al detalle.
+    // Una mejor aproximación es llamar a loadComments() cuando el #articulo-detalle-1 se hace visible.
+    // Por simplicidad, el ejemplo original usa window.onload.
+    
+    // Vamos a intentar cargarlos si el hash corresponde o si es la carga inicial y no hay hash
+    if (window.location.hash === "#articulo-detalle-1" || !window.location.hash) {
+        // Si el detalle del artículo es visible por defecto o por hash en URL
+        if(document.getElementById('articulo-detalle-1') && document.getElementById('articulo-detalle-1').style.display !== 'none') {
+            loadComments();
+        }
+    }
+
+    // Para manejar clics en "Leer más" y cargar comentarios cuando se muestra el detalle:
+    document.querySelectorAll('.view-articulo-detalle').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href').substring(1); // e.g., "articulo-detalle-1"
+            if (targetId === "articulo-detalle-1") { // O generalizar para cualquier artículo
+                 // Asumimos que tu lógica para mostrar/ocultar el detalle ya se ejecutó o se ejecutará.
+                 // Damos un pequeño tiempo para que el div se haga visible si es asíncrono.
+                setTimeout(loadComments, 100); // Ajusta el tiempo si es necesario
+            }
+        });
+    });
+});
+
+// Si tienes una función global para cambiar idioma, querrás llamarla después de cargar los comentarios
+// para traducir los textos dinámicos como "dijo:", "No hay comentarios...", etc.
+
+</script>
 </body>
 </html>

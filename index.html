@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Parenting Replica</title>
+    <style>
+        :root {
+            --primary-blue: #5482f9; /* Adjusted lighter blue for overall background */
+            --dark-blue-gradient-start: #3a5a9c; /* Darker blue for top of gradient */
+            --dark-blue-gradient-end: #5482f9;   /* Lighter blue for bottom of gradient */
+            --footer-blue: #2b3a58; /* Solid dark blue for footer */
+            --card-bg: #ffffff;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --button-primary: #3b71ca;
+            --button-subscribe: #dc3545;
+            --light-gray-bg: #f8f9fa;
+            --font-family: 'Arial', sans-serif; /* Using a common sans-serif */
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--primary-blue);
+            color: var(--text-dark);
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--footer-blue); /* Matches footer blue as per screenshots */
+            color: var(--text-light);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .logo-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-right: 30px;
+            padding-left: 15px; /* For "TRUE PARENTING" text */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #cccccc; /* Lighter shade for hover/active */
+            text-decoration: underline;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-switcher {
+            margin-right: 20px;
+            padding: 5px 0px; /* Add some padding for the clickable area */
+        }
+        .language-switcher span {
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 5px 8px; /* Padding around each language option */
+            font-size: 0.8em;
+            border: 1px solid transparent; /* For hover/active state */
+            border-radius: 3px;
+        }
+        .language-switcher span.active-lang {
+            border: 1px solid var(--text-light);
+        }
+        .language-switcher span:not(.active-lang):hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-subscribe {
+            background-color: var(--button-subscribe);
+            color: var(--text-light);
+        }
+        .btn-subscribe:hover {
+            background-color: #c82333;
+        }
+
+        .btn-primary {
+            background-color: var(--button-primary);
+            color: var(--text-light);
+            display: inline-block; /* For better sizing and margin */
+            margin-top: 15px;
+        }
+        .btn-primary:hover {
+            background-color: #2c5cb0;
+        }
+        
+        main {
+            flex-grow: 1; /* Allows main content to fill available space */
+        }
+        /* --- Page Sections --- */
+        .page {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s;
+        }
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* --- Hero Section (Homepage) --- */
+        #home .hero {
+            background: linear-gradient(to bottom, var(--dark-blue-gradient-start), var(--dark-blue-gradient-end) 70%, var(--primary-blue) 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 150px 20px 100px 20px; 
+            min-height: 50vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #home .hero h1 {
+            font-size: 4em; 
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        #home .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* --- Programs Section (Homepage) --- */
+        .programs-section, .videos-section {
+            padding: 40px 0;
+            text-align: center;
+            background-color: var(--primary-blue); 
+        }
+        .programs-section h2, .videos-section h2 {
+            color: var(--text-light);
+            margin-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        .section-divider {
+            width: 150px; 
+            height: 2px;
+            background-color: var(--text-light); 
+            margin: 0 auto 30px auto; 
+        }
+        .program-cards {
+            display: flex;
+            justify-content: center; 
+            gap: 20px;
+            flex-wrap: wrap; 
+            padding: 0 10px; 
+        }
+        .program-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 250px; 
+            text-align: left; 
+            color: var(--text-dark);
+        }
+        .program-card h3 {
+            margin-top: 0;
+            font-size: 1.3em;
+            color: var(--button-primary); 
+        }
+        .program-card p {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            min-height: 60px; 
+        }
+        
+        /* --- Videos Section (Homepage) --- */
+        .video-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        .video-thumbnail {
+            background-color: #444; 
+            width: 200px; 
+            height: 120px; 
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-end; 
+            justify-content: center; 
+            position: relative;
+            overflow: hidden;
+            color: var(--text-light);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top:0; left:0;
+        }
+        .video-thumbnail .caption {
+            background-color: rgba(0,0,0,0.6);
+            padding: 5px 0; 
+            font-size: 0.85em;
+            text-align: center;
+            width: 100%;
+            position: relative; 
+            z-index: 1;
+        }
+
+        /* --- Content Page Styling (for Quiénes Somos, Artículos, etc.) --- */
+        .content-page {
+            background-color: var(--primary-blue);
+            padding: 40px 0;
+        }
+        .content-block {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .content-block h2 {
+            margin-top: 0;
+            color: var(--button-primary);
+            font-size: 2em;
+        }
+         .content-block h3 {
+            color: var(--dark-blue-gradient-start);
+            font-size: 1.5em;
+            margin-top: 25px;
+        }
+        .content-block p, .content-block ul, .content-block ol {
+            line-height: 1.7;
+            color: #555;
+        }
+        .content-block ul {
+            padding-left: 20px;
+        }
+
+        /* Team Members */
+        .team-member {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .team-member:last-child {
+            border-bottom: none;
+        }
+        .team-member .member-name {
+            display: inline-block; 
+            border-bottom: 2px solid var(--button-subscribe);
+            padding-bottom: 2px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        /* Artículos specific */
+        .articulos-layout {
+            display: flex;
+            gap: 30px;
+        }
+        .articulos-main {
+            flex: 3; 
+        }
+        .articulos-sidebar {
+            flex: 1; 
+        }
+        .articulo-preview {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .articulo-preview:last-child {
+            border-bottom: none;
+        }
+        .articulo-preview h3 a {
+            text-decoration: none;
+            color: var(--button-primary);
+        }
+        .articulo-preview .meta {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .btn-link {
+            color: var(--button-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .widget {
+            background-color: var(--light-gray-bg);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .widget h4 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .widget ul {
+            list-style: none;
+            padding: 0;
+        }
+        .widget ul li {
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        .widget ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        .widget ul li .date {
+            display: block;
+            font-size: 0.8em;
+            color: #777;
+        }
+        .widget blockquote {
+            font-style: italic;
+            color: #555;
+            border-left: 3px solid var(--button-primary);
+            padding-left: 10px;
+            margin: 0 0 10px 0;
+        }
+        .widget .quote-author {
+            text-align: right;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Comentarios */
+        .comments-section h3 {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .comment {
+            border-bottom: 1px dashed #eee;
+            padding: 15px 0;
+        }
+        .comment:last-child { border-bottom: none; }
+        .comment strong { color: var(--text-dark); }
+        .comment p { margin: 5px 0 0 0; }
+        .comment-form input[type="text"], 
+        .comment-form input[type="email"], 
+        .comment-form textarea {
+            width: calc(100% - 22px); 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--font-family);
+        }
+        .comment-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Retos de Lectura specific */
+        .retos-layout {
+            display: flex;
+            gap: 30px;
+        }
+        .retos-main {
+            flex: 2;
+        }
+        .retos-sidebar {
+            flex: 1;
+        }
+        .reto-card {
+            background-color: var(--button-primary); 
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .reto-card h4 { margin-top: 0; font-size: 1.2em; }
+        .reto-card p { font-size: 0.9em; margin-bottom: 5px; }
+        .reto-tasks {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        .reto-tasks li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9em;
+        }
+        .reto-tasks li:last-child { border-bottom: none; }
+        .reto-tasks input[type="checkbox"] {
+            margin-left: 10px;
+            transform: scale(1.2); 
+        }
+        .lectura-intro {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+         .lectura-intro p { font-size: 1.1em; }
+
+        /* Patreon specific */
+        #nuestro-patreon .btn-patreon {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0 auto; 
+            background-color: #f96854; 
+            font-weight: bold;
+        }
+        #nuestro-patreon .btn-patreon:hover {
+            background-color: #e05a49;
+        }
+        #nuestro-patreon .patreon-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        #nuestro-patreon .patreon-note a {
+            color: var(--button-primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--footer-blue);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px 0;
+           /* margin-top: auto; removed this for body flex setting */
+        }
+        .social-icons a {
+            color: var(--text-light);
+            margin: 0 10px;
+            font-size: 1.5em; 
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #cccccc;
+        }
+
+        /* --- Modal --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); 
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center; 
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .close-btn:hover { color: var(--text-dark); }
+        .modal-content h3 { margin-top: 0; color: var(--button-primary); }
+        .modal-content p { font-size: 0.9em; color: #555; margin-bottom: 15px;}
+        .modal-content input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+
+        /* Responsive adjustments - basic */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; align-items: flex-start;}
+            .logo-nav { flex-direction: column; align-items: flex-start; width: 100%;}
+            .logo { margin-bottom: 10px;}
+            nav ul { flex-direction: column; width: 100%;}
+            nav ul li { margin-right: 0; margin-bottom: 5px; padding: 5px 0;}
+            .header-right { width: 100%; justify-content: flex-start; margin-top:10px;}
+            
+            #home .hero h1 { font-size: 2.5em; }
+            .program-cards, .video-thumbnails { flex-direction: column; align-items: center; }
+            .program-card { width: 80%; max-width: 300px; margin-bottom: 20px; }
+            .video-thumbnail { width: 80%; max-width: 300px; height: auto; aspect-ratio: 16/9; margin-bottom:10px; }
+
+            .articulos-layout, .retos-layout { flex-direction: column; }
+            .articulos-main, .articulos-sidebar, .retos-main, .retos-sidebar { flex: none; width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-nav">
+                <div class="logo" data-lang-spa="TRUE PARENTING" data-lang-swe="TRUE PARENTING">TRUE PARENTING</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-lang-spa="INICIO" data-lang-swe="HEM">INICIO</a></li>
+                        <li><a href="#quienes-somos" class="nav-link" data-lang-spa="QUIÉNES SOMOS" data-lang-swe="OM OSS">QUIÉNES SOMOS</a></li>
+                        <li><a href="#articulos" class="nav-link" data-lang-spa="ARTÍCULOS" data-lang-swe="ARTIKLAR">ARTÍCULOS</a></li>
+                        <li><a href="#retos-lectura" class="nav-link" data-lang-spa="RETOS DE LECTURA" data-lang-swe="LÄSUTMANINGAR">RETOS DE LECTURA</a></li>
+                        <li><a href="#contacto" class="nav-link" data-lang-spa="CONTACTO" data-lang-swe="KONTAKT">CONTACTO</a></li>
+                        <li><a href="#nuestro-patreon" class="nav-link" data-lang-spa="NUESTRO PATREON" data-lang-swe="VÅR PATREON">NUESTRO PATREON</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <span id="lang-spa" class="active-lang">SPA</span>
+                    <span id="lang-swe">SWE</span>
+                </div>
+                <button class="btn btn-subscribe" id="openSubscribeModal" data-lang-spa="SUSCRIBIRSE" data-lang-swe="PRENUMERERA">SUSCRIBIRSE</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Página de Inicio -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1 data-lang-spa="¡Vamos sí se puede!" data-lang-swe="Kom igen, du kan!">¡Vamos sí se puede!</h1>
+                <p data-lang-spa="Transforma tu familia con principios bíblicos" data-lang-swe="Förvandla din familj med bibliska principer">Transforma tu familia con principios bíblicos</p>
+                <a href="#" class="btn btn-primary" data-lang-spa="DESCUBRE MÁS" data-lang-swe="UPPTÄCK MER">DESCUBRE MÁS</a>
+            </div>
+            <div class="programs-section">
+                <div class="container">
+                    
+                    <h2 data-lang-spa="Elige tu programa" data-lang-swe="Välj ditt program">Elige tu programa</h2>
+                    <div class="section-divider"></div>
+                    <div class="program-cards">
+                        <div class="program-card">
+                            <h3 data-lang-spa="Club de Lectura" data-lang-swe="Bokklubb">Club de Lectura</h3>
+                            <p data-lang-spa="Nyckeln till kunskap är att läsa böcker. Li..." data-lang-swe="Nyckeln till kunskap är att läsa böcker. Li...">Nyckeln till kunskap är att läsa böcker. Li...</p>
+                            <a href="#" class="btn btn-primary" data-lang-spa="Utforska" data-lang-swe="Utforska">Utforska</a>
+                        </div>
+                        <div class="program-card">
+                            <h3 data-lang-spa="Cyberfamiljer" data-lang-swe="Cyberfamiljer">Cyberfamiljer</h3>
+                            <p data-lang-spa="Föreläsningar på YouTube om teknikens..." data-lang-swe="Föreläsningar på YouTube om teknikens...">Föreläsningar på YouTube om teknikens...</p>
+                            <a href="#" class="btn btn-primary" data-lang-spa="Utforska" data-lang-swe="Utforska">Utforska</a>
+                        </div>
+                        <div class="program-card">
+                            <h3 data-lang-spa="Ursprunglig Design" data-lang-swe="Ursprunglig Design">Ursprunglig Design</h3>
+                            <p data-lang-spa="En YouTube-kurs som lär dig om sexualit..." data-lang-swe="En YouTube-kurs som lär dig om sexualit...">En YouTube-kurs som lär dig om sexualit...</p>
+                            <a href="#" class="btn btn-primary" data-lang-spa="Utforska" data-lang-swe="Utforska">Utforska</a>
+                        </div>
+                         <div class="program-card"> 
+                            <h3 data-lang-spa="Bok..." data-lang-swe="Bok...">Bok...</h3>
+                            <p data-lang-spa="Beskrivning kortfattad..." data-lang-swe="Beskrivning kortfattad...">Beskrivning kortfattad...</p>
+                            <a href="#" class="btn btn-primary" data-lang-spa="Utforska" data-lang-swe="Utforska">Utforska</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="videos-section">
+                <div class="container">
+                     <!-- SWE title "Senaste Videor" from screenshot -->
+                    <h2 data-lang-spa="Últimos Videos" data-lang-swe="Senaste Videor">Últimos Videos</h2>
+                    <div class="section-divider"></div>
+                    <div class="video-thumbnails">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/6c757d/fff?text=Ursprunglig+De..." alt="Ursprunglig Design thumbnail">
+                            <div class="caption" data-lang-spa="Ursprunglig De..." data-lang-swe="Ursprunglig De...">Ursprunglig De...</div>
+                        </div>
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/6c757d/fff?text=Kvinna+Ursprun..." alt="Kvinna Ursprunglig Design thumbnail">
+                             <div class="caption" data-lang-spa="Kvinna Ursprunglig De..." data-lang-swe="Kvinna Ursprunglig De...">Kvinna Ursprunglig De...</div>
+                        </div>
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/ff69b4/fff?text=Bokklubb" alt="Bokklubb thumbnail">
+                            <div class="caption" data-lang-spa="Bokklubb" data-lang-swe="Bokklubb">Bokklubb</div>
+                        </div>
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/dc3545/fff?text=Feminism+och+Abort" alt="Feminism och Abort thumbnail">
+                            <div class="caption" data-lang-spa="Feminism och Abort" data-lang-swe="Feminism och Abort">Feminism och Abort</div>
+                        </div>
+                         <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/ffc107/333?text=Postmodernism" alt="Postmodernism thumbnail">
+                            <div class="caption" data-lang-spa="Postmodernism" data-lang-swe="Postmodernism">Postmodernism</div>
+                        </div>
+                         <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/200x120/28a745/fff?text=Bokklubb+2" alt="Bokklubb 2 thumbnail">
+                            <div class="caption" data-lang-spa="Bokklubb 2" data-lang-swe="Bokklubb 2">Bokklubb 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiénes Somos -->
+        <section id="quienes-somos" class="page content-page">
+            <div class="container">
+                <div class="content-block">
+                    <h2 data-lang-spa="Quiénes somos" data-lang-swe="Om oss">Quiénes somos</h2>
+                    <p data-lang-spa="Según la Biblia, la familia es la institución principal de la sociedad que constituye la base de todas las demás esferas, como la sociedad civil, los negocios, la educación y las instituciones estatales. En pocas palabras, una sociedad la construyen las familias, y así como va la familia, así va nuestro mundo. True Parenting quiere ayudar a comprender y aplicar los principios bíblicos para la familia. Esto incluye no solo consejos para la crianza de los hijos, sino también orientación para comprender la sociedad en su conjunto. Cuando entendemos los principios de Dios para la sociedad y la familia, también podemos navegar mejor en el mundo en el que vivimos." data-lang-swe="Enligt Bibeln är familjen samhällets huvudsakliga institution som utgör grunden för alla andra sfärer, såsom det civila samhället, näringslivet, utbildning och statliga institutioner. Kort sagt, ett samhälle byggs av familjer, och så som familjen mår, så mår vår värld. True Parenting vill hjälpa till att förstå och tillämpa Bibelns principer för familjen. Detta inkluderar inte bara råd för barnuppfostran, utan också vägledning för att förstå samhället som helhet. När vi förstår Guds principer för samhället och familjen kan vi också bättre navigera i den värld vi lever i.">Según la Biblia, la familia es la institución principal de la sociedad que constituye la base de todas las demás esferas, como la sociedad civil, los negocios, la educación y las instituciones estatales. En pocas palabras, una sociedad la construyen las familias, y así como va la familia, así va nuestro mundo. True Parenting quiere ayudar a comprender y aplicar los principios bíblicos para la familia. Esto incluye no solo consejos para la crianza de los hijos, sino también orientación para comprender la sociedad en su conjunto. Cuando entendemos los principios de Dios para la sociedad y la familia, también podemos navegar mejor en el mundo en el que vivimos.</p>
+                    <p style="font-style: italic; color: #777; font-size:0.9em;" data-lang-spa="Familia True Parenting" data-lang-swe="Familjen True Parenting">Familia True Parenting</p>
+
+                    <h3 data-lang-spa="Nuestro equipo" data-lang-swe="Vårt team">Nuestro equipo</h3>
+                    <p data-lang-spa="Somos un grupo de padres, educadores y consejeros comprometidos con la difusión de los principios bíblicos para la familia. Cada uno de nosotros ha experimentado el poder transformador de aplicar estos principios en nuestras propias familias." data-lang-swe="Vi är en grupp föräldrar, pedagoger och rådgivare som är engagerade i att sprida Bibelns principer för familjen. Var och en av oss har upplevt den transformerande kraften i att tillämpa dessa principer i våra egna familjer.">Somos un grupo de padres, educadores y consejeros comprometidos con la difusión de los principios bíblicos para la familia. Cada uno de nosotros ha experimentado el poder transformador de aplicar estos principios en nuestras propias familias.</p>
+                    
+                    <div class="team-member">
+                        <div class="member-name" data-lang-spa="Urban" data-lang-swe="Urban">Urban</div>
+                        <p data-lang-spa="Descripción del perfil de este miembro del equipo. Puedes incluir su experiencia, formación, visión para True Parenting y cómo aplica los principios bíblicos en su propia familia." data-lang-swe="Beskrivning av denna teammedlems profil. Du kan inkludera hens erfarenhet, utbildning, vision för True Parenting och hur hen tillämpar Bibelns principer i sin egen familj.">Descripción del perfil de este miembro del equipo. Puedes incluir su experiencia, formación, visión para True Parenting y cómo aplica los principios bíblicos en su propia familia.</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-name" data-lang-spa="Marleny" data-lang-swe="Marleny">Marleny</div>
+                        <p data-lang-spa="Descripción del perfil de este miembro del equipo. Información sobre su trayectoria, experiencia en consejería familiar o educación, y su contribución al ministerio de True Parenting." data-lang-swe="Beskrivning av denna teammedlems profil. Information om hens bakgrund, erfarenhet inom familjerådgivning eller utbildning, och hens bidrag till True Parentings tjänst.">Descripción del perfil de este miembro del equipo. Información sobre su trayectoria, experiencia en consejería familiar o educación, y su contribución al ministerio de True Parenting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artículos -->
+        <section id="articulos" class="page content-page">
+            <div class="container">
+                <div class="articulos-layout">
+                    <div class="articulos-main">
+                        <div class="content-block" id="articulo-lista">
+                            <!-- Contenido basado en screenshot -->
+                            <div class="articulo-preview">
+                                <h3><a href="#articulo-detalle-1" class="view-articulo-detalle" data-lang-spa="20 maneras de ayudar a los niños a amar la lectura" data-lang-swe="20 sätt att hjälpa barn att älska att läsa">20 maneras de ayudar a los niños a amar la lectura</a></h3>
+                                <div class="meta" data-lang-spa="22 abr, 2025" data-lang-swe="22 apr, 2025">22 abr, 2025</div>
+                                <p data-lang-spa="20 maneras de ayudar a los niños a amar la lectura. ¿Qué libros me recomiendas para mis hijos?..." data-lang-swe="20 sätt att hjälpa barn att älska att läsa. Vilka böcker rekommenderar du för mina barn?...">20 maneras de ayudar a los niños a amar la lectura. ¿Qué libros me recomiendas para mis hijos?..."</p>
+                                <a href="#articulo-detalle-1" class="btn-link view-articulo-detalle" data-lang-spa="Leer más" data-lang-swe="Läs mer">Leer más</a>
+                            </div>
+                            <div class="articulo-preview">
+                                <h3><a href="#articulo-detalle-2" class="view-articulo-detalle" data-lang-spa="Superar la ansiedad - Plan de transcripción de abril" data-lang-swe="Övervinna ångest - Transkriptionsplan för april">Superar la ansiedad - Plan de transcripción de abril</a></h3>
+                                <div class="meta" data-lang-spa="30 mar, 2025" data-lang-swe="30 mar, 2025">30 mar, 2025</div>
+                                <p data-lang-spa="Superar la ansiedad - Plan de transcripción de abril. Mientras meditaba sobre lo difícil que es tener un corazón contento..." data-lang-swe="Övervinna ångest - Transkriptionsplan för april. Medan jag mediterade över hur svårt det är att ha ett nöjt hjärta...">Superar la ansiedad - Plan de transcripción de abril. Mientras meditaba sobre lo difícil que es tener un corazón contento...</p>
+                                <a href="#articulo-detalle-2" class="btn-link view-articulo-detalle" data-lang-spa="Leer más" data-lang-swe="Läs mer">Leer más</a>
+                            </div>
+                            <div class="articulo-preview">
+                                <h3><a href="#articulo-detalle-3" class="view-articulo-detalle" data-lang-spa="La educación es la ciencia de las relaciones" data-lang-swe="Utbildning är relationernas vetenskap">La educación es la ciencia de las relaciones</a></h3>
+                                <div class="meta" data-lang-spa="13 mar, 2025" data-lang-swe="13 mar, 2025">13 mar, 2025</div>
+                                <p data-lang-spa='La educación es la ciencia de las relaciones. "La educación es una atmósfera, una disciplina y una vida". Fue en el libro de Charlotte Mason donde leí por primera vez...' data-lang-swe='Utbildning är relationernas vetenskap. "Utbildning är en atmosfär, en disciplin och ett liv." Det var i Charlotte Masons bok jag först läste...'>La educación es la ciencia de las relaciones. "La educación es una atmósfera, una disciplina y una vida". Fue en el libro de Charlotte Mason donde leí por primera vez...</p>
+                                <a href="#articulo-detalle-3" class="btn-link view-articulo-detalle" data-lang-spa="Leer más" data-lang-swe="Läs mer">Leer más</a>
+                            </div>
+                             <div class="articulo-preview">
+                                <h3><a href="#" class="view-articulo-detalle" data-lang-spa="Contentamiento prueba" data-lang-swe="Test av förnöjsamhet">Contentamiento prueba</a></h3>
+                                <div class="meta" data-lang-spa="27 feb, 2025" data-lang-swe="27 feb, 2025">27 feb, 2025</div>
+                                <p data-lang-spa='Contentamiento. "El contentamiento es algo dulce en el interior del corazón."...' data-lang-swe='Förnöjsamhet. "Förnöjsamhet är något sött i hjärtats inre."...'>Contentamiento. "El contentamiento es algo dulce en el interior del corazón."...</p>
+                                <a href="#" class="btn-link view-articulo-detalle" data-lang-spa="Leer más" data-lang-swe="Läs mer">Leer más</a>
+                            </div>
+                        </div>
+
+                        <div class="content-block" id="articulo-detalle-1" style="display:none;">
+                            <button class="btn-link back-to-articulos-lista" data-lang-spa="< Volver a la lista" data-lang-swe="< Tillbaka till listan">< Volver a la lista</button>
+                            <h2 data-lang-spa="22 maneras de ayudar a los niños a amar la lectura" data-lang-swe="22 sätt att hjälpa barn att älska att läsa">22 maneras de ayudar a los niños a amar la lectura</h2>
+                            <div class="meta" data-lang-spa="22 abr, 2025" data-lang-swe="22 apr, 2025">22 abr, 2025</div>
+                            <p data-lang-spa="¿Qué libros me recomiendas para mis hijos? ¿Cómo motivo a mi hijo para que lea más? Son preguntas recurrentes en mi club de lectura en los que estoy. Una gran cantidad de padres saben lo importante que es la lectura para el desarrollo integral de sus hijos pero, son pocos los que logran cultivar este hábito y hacerlo parte de su cultura familiar. Sé que en ocasiones desearíamos tener una fórmula mágica que convierta a nuestros hijos en buenos lectores, pero por encima de eso, creo que nuestros esfuerzos deberían enfocarse en crear un ambiente propicio para el disfrute de la lectura y el amor por los libros, como lo dijo Kate DiCamillo: “La lectura no debe presentarse a los niños como una tarea. Debería ofrecerse como un regalo”." data-lang-swe="Vilka böcker rekommenderar du för mina barn? Hur motiverar jag mitt barn att läsa mer? Detta är återkommande frågor i min bokklubb. Många föräldrar vet hur viktigt det är med läsning för deras barns övergripande utveckling, men få lyckas odla denna vana och göra den till en del av familjekulturen. Jag vet att vi ibland önskar att det fanns en magisk formel som förvandlade våra barn till goda läsare, men framför allt tror jag att våra ansträngningar bör fokusera på att skapa en gynnsam miljö för läsglädje och kärlek till böcker, som Kate DiCamillo sa: 'Läsning bör inte presenteras för barn som en uppgift. Den bör erbjudas som en gåva.'">¿Qué libros me recomiendas para mis hijos? ¿Cómo motivo a mi hijo para que lea más? Son preguntas recurrentes en mi club de lectura en los que estoy. Una gran cantidad de padres saben lo importante que es la lectura para el desarrollo integral de sus hijos pero, son pocos los que logran cultivar este hábito y hacerlo parte de su cultura familiar. Sé que en ocasiones desearíamos tener una fórmula mágica que convierta a nuestros hijos en buenos lectores, pero por encima de eso, creo que nuestros esfuerzos deberían enfocarse en crear un ambiente propicio para el disfrute de la lectura y el amor por los libros, como lo dijo Kate DiCamillo: “La lectura no debe presentarse a los niños como una tarea. Debería ofrecerse como un regalo”.</p>
+                            <p data-lang-spa="Aquí algunos útiles consejos que recopilé años atrás para que tus hijos amen leer:" data-lang-swe="Här är några användbara tips som jag samlade för flera år sedan för att dina barn ska älska att läsa:">Aquí algunos útiles consejos que recopilé años atrás para que tus hijos amen leer:</p>
+                            <!-- List items also need data-lang attributes for translation -->
+                            <ol>
+                                <li data-lang-spa="Enséñale a tu hijo a leer." data-lang-swe="Lär ditt barn att läsa.">Enséñale a tu hijo a leer.</li>
+                                <li data-lang-spa="Deja que tu hijo te vea leer." data-lang-swe="Låt ditt barn se dig läsa.">Deja que tu hijo te vea leer.</li>
+                                <!-- ... (Continue for all list items if translations are available) ... -->
+                            </ol>
+                            <p data-lang-spa="¿Cuál de estos consejos deseas poner en práctica? Cuéntame en los comentarios." data-lang-swe="Vilka av dessa tips vill du omsätta i praktiken? Berätta för mig i kommentarerna.">¿Cuál de estos consejos deseas poner en práctica? Cuéntame en los comentarios.</p>
+                            <p data-lang-spa="Con cariño," data-lang-swe="Med vänlig hälsning,">Con cariño,</p>
+                            <p data-lang-spa="Marleny" data-lang-swe="Marleny">Marleny</p>
+                            
+                            <div class="comments-section">
+                                <h3 data-lang-spa="Comentarios - 22 maneras de ayudar a los niños a amar la lectura" data-lang-swe="Kommentarer - 22 sätt att hjälpa barn att älska att läsa">Comentarios - 22 maneras de ayudar a los niños a amar la lectura</h3>
+                                <div class="comment">
+                                    <strong>Sandra Román</strong>
+                                    <p data-lang-spa="Gracias por esta maravillosa herramienta de aprendizaje que nos ofreces. El plan de transcripción es de gran bendición. Dios te bendiga!" data-lang-swe="Tack för detta underbara lärverktyg du erbjuder oss. Transkriptionsplanen är en stor välsignelse. Gud välsigne dig!">Gracias por esta maravillosa herramienta de aprendizaje que nos ofreces. El plan de transcripción es de gran bendición. Dios te bendiga!</p>
+                                </div>
+                                <!-- ... more comments, ideally with translations ... -->
+
+                                <h3 data-lang-spa="¡Únete a la conversación!" data-lang-swe="Delta i konversationen!">¡Únete a la conversación!</h3>
+                                <form class="comment-form">
+                                    <input type="text" placeholder="Nombre" required data-lang-spa-placeholder="Nombre" data-lang-swe-placeholder="Namn">
+                                    <input type="email" placeholder="Correo electrónico" required data-lang-spa-placeholder="Correo electrónico" data-lang-swe-placeholder="E-post">
+                                    <textarea placeholder="Comentario" required data-lang-spa-placeholder="Comentario" data-lang-swe-placeholder="Kommentar"></textarea>
+                                    <button type="submit" class="btn btn-primary" data-lang-spa="Enviar comentario" data-lang-swe="Skicka kommentar">Enviar comentario</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Placeholder for other articles detail -->
+                        <div class="content-block" id="articulo-detalle-2" style="display:none;"> ... </div>
+                        <div class="content-block" id="articulo-detalle-3" style="display:none;"> ... </div>
+                    </div>
+                    <aside class="articulos-sidebar">
+                        <div class="widget">
+                            <h4 data-lang-spa="Entradas recientes" data-lang-swe="Senaste inlägg">Entradas recientes</h4>
+                            <ul>
+                                <!-- Entries from screenshot -->
+                                <li><a href="#">20 maneras de ayudar a las mamás</a><span class="date">22 abr, 2025</span></li>
+                                <li><a href="#">Superar la ansiedad - Plan de transcripción de abril</a><span class="date">30 mar, 2025</span></li>
+                                <li><a href="#">La educación es la ciencia de las relaciones</a><span class="date">13 mar, 2025</span></li>
+                            </ul>
+                        </div>
+                        <div class="widget">
+                            <h4 data-lang-spa="Alguien lo dijo" data-lang-swe="Någon sa det">Alguien lo dijo</h4>
+                            <blockquote data-lang-spa='"Por supuesto que debemos aspirar a una sociedad segura para los ciudadanos, pero primero tenemos que crear ciudadanos seguros para la sociedad."' data-lang-swe='"Självklart måste vi sträva efter ett tryggt samhälle för medborgarna, men först måste vi skapa trygga medborgare för samhället."'>"Por supuesto que debemos aspirar a una sociedad segura para los ciudadanos, pero primero tenemos que crear ciudadanos seguros para la sociedad."</blockquote>
+                            <p class="quote-author">Ade Omotoso</p>
+                            <blockquote data-lang-spa='"Una nación es el reflejo de su iglesia"' data-lang-swe='"En nation är en spegling av sin kyrka"'>"Una nación es el reflejo de su iglesia"</blockquote>
+                            <!-- Author missing -->
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Retos de Lectura -->
+        <section id="retos-lectura" class="page content-page">
+            <div class="container">
+                <div class="lectura-intro">
+                    <h2 data-lang-spa="RETOS DE LECTURA" data-lang-swe="LÄSUTMANINGAR">RETOS DE LECTURA</h2>
+                    <p data-lang-spa="¿Te gustaría leer más? Aquí tienes un espacio donde te motivarás a hacerlo a través de sencillos retos." data-lang-swe="Vill du läsa mer? Här är en plats där du blir motiverad att göra det genom enkla utmaningar.">¿Te gustaría leer más? Aquí tienes un espacio donde te motivarás a hacerlo a través de sencillos retos.</p>
+                    <p data-lang-spa="Libro con gafas de lectura" data-lang-swe="Bok med läsglasögon">Libro con gafas de lectura</p> 
+                </div>
+
+                <div class="retos-layout">
+                    <div class="retos-main">
+                        <div class="content-block">
+                            <h3 data-lang-spa="SEGUNDO RETO DE MARZO" data-lang-swe="ANDRA MARSUTMANINGEN">SEGUNDO RETO DE MARZO</h3>
+                            <p data-lang-spa='Iniciamos el mes leyendo sobre el contentamiento y creo que un buen complemento para el tema es considerar la tendencia de nuestra mente a quejarse cuando las cosas no nos permiten experimentar la plenitud que Dios desea para nuestras vidas. Es por esto que el libro como propuesta el libro de Thomas Goodwin: "La vanidad de los pensamientos".' data-lang-swe='Vi inleder månaden med att läsa om förnöjsamhet och jag tror att ett bra komplement till temat är att överväga vår tendens att klaga när saker och ting inte tillåter oss att uppleva den fullhet som Gud önskar för våra liv. Därför är bokförslaget Thomas Goodwins bok: "Tankarnas fåfänga".'>Iniciamos el mes leyendo sobre el contentamiento y creo que un buen complemento para el tema es <strong>considerar</strong> la tendencia de nuestra mente a quejarse cuando las cosas no nos permiten experimentar la plenitud que Dios desea para nuestras vidas. Es por esto que el libro como propuesta el libro de Thomas Goodwin: <strong>"La vanidad de los pensamientos"</strong>.</p>
+                           <!-- ... more content based on screenshots ... -->
+                        </div>
+                    </div>
+                    <aside class="retos-sidebar">
+                        <div class="widget">
+                           <div class="reto-card">
+                                <h4 data-lang-spa="RETO DE LECTURA" data-lang-swe="LÄSUTMANING">RETO DE LECTURA</h4>
+                                <p>TrueParenting.com</p>
+                                <p data-lang-spa="Envíalo en el mail: leerenfamilia@gmail.com" data-lang-swe="Skicka det via e-post: leerenfamilia@gmail.com">Envíalo en el mail: leerenfamilia@gmail.com</p>
+                                <hr style="border-color: rgba(255,255,255,0.3);">
+                                <p><strong data-lang-spa="LIBRO: LA VANIDAD DEL CONTENTAMIENTO - DEL 24 AL 30 DE MARZO" data-lang-swe="BOK: FÖRNÖJSAMHETENS FÅFÄNGA - 24 TILL 30 MARS">LIBRO: LA VANIDAD DEL CONTENTAMIENTO - DEL 24 AL 30 DE MARZO</strong></p>
+                                <!-- Tasks would also need translation data-attributes -->
+                                <ul class="reto-tasks">
+                                    <li>Colorear a él durante el día: <input type="checkbox"></li>
+                                    <!-- ... -->
+                                </ul>
+                           </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="page content-page">
+            <div class="container">
+                <div class="content-block">
+                    <h2 data-lang-spa="Contacto" data-lang-swe="Kontakt">Contacto</h2>
+                    <p data-lang-spa="Si tienes alguna pregunta o quieres ponerte en contacto con nosotros, completa el formulario a continuación." data-lang-swe="Om du har några frågor eller vill kontakta oss, fyll i formuläret nedan.">Información de contacto y formulario (no visible en screenshots, así que es un placeholder).</p>
+                    <form>
+                        <input type="text" placeholder="Tu Nombre" required data-lang-spa-placeholder="Tu Nombre" data-lang-swe-placeholder="Ditt namn">
+                        <input type="email" placeholder="Tu Email" required data-lang-spa-placeholder="Tu Email" data-lang-swe-placeholder="Din e-post">
+                        <textarea placeholder="Tu Mensaje" required data-lang-spa-placeholder="Tu Mensaje" data-lang-swe-placeholder="Ditt meddelande" style="width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; min-height:120px;"></textarea>
+                        <button type="submit" class="btn btn-primary" data-lang-spa="Enviar Mensaje" data-lang-swe="Skicka meddelande">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestro Patreon -->
+        <section id="nuestro-patreon" class="page content-page">
+            <div class="container">
+                <div class="content-block">
+                    <h2 data-lang-spa="Nuestro Patreon" data-lang-swe="Vår Patreon">Nuestro Patreon</h2>
+                    <p data-lang-spa="En True Parenting, trabajamos apasionadamente para fortalecer a las familias a través de principios bíblicos, ofreciendo recursos, artículos y contenido que transforman vidas. Pero para seguir creciendo y llegar a más hogares, necesitamos tu apoyo." data-lang-swe="På True Parenting arbetar vi passionerat för att stärka familjer genom bibliska principer, och erbjuder resurser, artiklar och innehåll som förvandlar liv. Men för att fortsätta växa och nå fler hem behöver vi ditt stöd.">En True Parenting, trabajamos apasionadamente para fortalecer a las familias a través de principios bíblicos, ofreciendo recursos, artículos y contenido que transforman vidas. Pero para seguir creciendo y llegar a más hogares, necesitamos tu apoyo.</p>
+
+                    <div style="background-color: var(--light-gray-bg); padding:20px; border-radius: 6px; margin-top: 20px;">
+                        <h3 data-lang-spa="¿Por qué deberías apoyarnos?" data-lang-swe="Varför ska du stödja oss?">¿Por qué deberías apoyarnos?</h3>
+                        <p data-lang-spa="Tu donación a través de Patreon nos permite:" data-lang-swe="Din donation via Patreon gör det möjligt för oss att:">Tu donación a través de Patreon nos permite:</p>
+                        <ul>
+                            <li data-lang-spa="<strong>Hacer sostenible nuestro ministerio:</strong> Cubrir costos operativos y mantener nuestros recursos gratuitos accesibles para todos." data-lang-swe="<strong>Göra vår tjänst hållbar:</strong> Täcka driftskostnader och hålla våra gratisresurser tillgängliga för alla."><strong>Hacer sostenible nuestro ministerio:</strong> Cubrir costos operativos y mantener nuestros recursos gratuitos accesibles para todos.</li>
+                            <!-- ... other list items with translations ... -->
+                        </ul>
+                        <p data-lang-spa="Además, al convertirte en nuestro patrón, obtendrás <strong>beneficios exclusivos</strong>:" data-lang-swe="Dessutom, genom att bli vår patron, får du <strong>exklusiva förmåner</strong>:">Además, al convertirte en nuestro patrón, obtendrás <strong>beneficios exclusivos</strong>:</p>
+                        <!-- ... other list items ... -->
+                        <p data-lang-spa="Únete a nosotros para construir un futuro donde las familias prosperen bajo los principios de Dios. ¡Tu apoyo marca la diferencia!" data-lang-swe="Gå med oss för att bygga en framtid där familjer blomstrar under Guds principer. Ditt stöd gör skillnad!">Únete a nosotros para construir un futuro donde las familias prosperen bajo los principios de Dios. ¡Tu apoyo marca la diferencia!</p>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-patreon" data-lang-spa="APOYANOS EN PATREON" data-lang-swe="STÖD OSS PÅ PATREON">APOYANOS EN PATREON</a>
+                    <p class="patreon-note" data-lang-spa="¿Tienes preguntas sobre cómo apoyar? <a href='#contacto'>Escríbenos en nuestra página de contacto.</a>" data-lang-swe="Har du frågor om hur du kan stödja? <a href='#contacto'>Skriv till oss på vår kontaktsida.</a>">¿Tienes preguntas sobre cómo apoyar? <a href="#contacto" class="internal-link">Escríbenos en nuestra página de contacto.</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#" title="Facebook">FB</a>
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="YouTube">YT</a>
+        </div>
+    </footer>
+
+<div id="subscribeModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeSubscribeModal">×</span>
+        <h3 data-lang-spa="Suscríbete" data-lang-swe="Prenumerera">Suscríbete</h3>
+        <p data-lang-spa="Recibe novedades y recursos directamente en tu correo." data-lang-swe="Få nyheter och resurser direkt till din e-post.">
+            Recibe novedades y recursos directamente en tu correo.
+        </p>
+        <form name="subscribe" method="POST" data-netlify="true">
+            <input type="email" name="email" placeholder="Tu correo electrónico" required 
+                data-lang-spa-placeholder="Tu correo electrónico" 
+                data-lang-swe-placeholder="Din e-postadress">
+            <button type="submit" class="btn btn-primary" data-lang-spa="ENVIAR" data-lang-swe="SKICKA">ENVIAR</button>
+        </form>
+    </div>
+</div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const openModalBtn = document.getElementById('openSubscribeModal');
+        const closeModalBtn = document.getElementById('closeSubscribeModal');
+        const subscribeModal = document.getElementById('subscribeModal');
+        const langSpaBtn = document.getElementById('lang-spa');
+        const langSweBtn = document.getElementById('lang-swe');
+
+        function switchPage(targetId) {
+            pages.forEach(page => page.classList.remove('active'));
+            const targetPage = document.getElementById(targetId.substring(1));
+            if (targetPage) targetPage.classList.add('active');
+            else if (targetId === '#home' || !targetPage) document.getElementById('home').classList.add('active');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === targetId) link.classList.add('active');
+            });
+            window.scrollTo(0,0); 
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                // If it's an internal link for a different purpose, like scrolling to contact from Patreon
+                if (link.classList.contains('internal-link')) {
+                    const actualTargetId = link.getAttribute('href'); // e.g. #contacto
+                     switchPage(actualTargetId);
+                     if (history.pushState) history.pushState(null, null, actualTargetId);
+                     else location.hash = actualTargetId;
+                    return; 
+                }
+                switchPage(targetId);
+                if (history.pushState) history.pushState(null, null, targetId);
+                else location.hash = targetId;
+            });
+        });
+        
+        if (window.location.hash && document.getElementById(window.location.hash.substring(1))) {
+            switchPage(window.location.hash);
+        } else {
+            switchPage('#home'); 
+        }
+
+        window.addEventListener('popstate', () => {
+            if (window.location.hash && document.getElementById(window.location.hash.substring(1))) {
+                switchPage(window.location.hash);
+            } else {
+                switchPage('#home');
+            }
+        });
+
+        if (openModalBtn) openModalBtn.addEventListener('click', () => subscribeModal.style.display = 'flex');
+        if (closeModalBtn) closeModalBtn.addEventListener('click', () => subscribeModal.style.display = 'none');
+        window.addEventListener('click', (event) => {
+            if (event.target == subscribeModal) subscribeModal.style.display = 'none';
+        });
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-lang-spa]').forEach(el => {
+                let text = '';
+                let placeholderText = '';
+
+                if (lang === 'swe' && el.dataset.langSwe) {
+                    text = el.dataset.langSwe;
+                    if (el.dataset.langSwePlaceholder) placeholderText = el.dataset.langSwePlaceholder;
+                    else if (el.hasAttribute('placeholder')) placeholderText = text; // Fallback if specific swe placeholder not set
+
+                } else { // Default to Spanish
+                    text = el.dataset.langSpa;
+                     if (el.dataset.langSpaPlaceholder) placeholderText = el.dataset.langSpaPlaceholder;
+                     else if (el.hasAttribute('placeholder')) placeholderText = text; // Fallback for SPA
+                }
+
+                if (el.hasAttribute('placeholder')) {
+                    el.placeholder = placeholderText || text; // Use placeholder if exists, else text
+                } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { // for value maybe, though not used here
+                     // el.value = text; 
+                } else {
+                    el.innerHTML = text; // Use innerHTML to support <strong> etc. in translations
+                }
+            });
+            langSpaBtn.classList.toggle('active-lang', lang === 'spa');
+            langSweBtn.classList.toggle('active-lang', lang === 'swe');
+            localStorage.setItem('preferredLanguage', lang); // Store preference
+        }
+
+        langSpaBtn.addEventListener('click', () => setLanguage('spa'));
+        langSweBtn.addEventListener('click', () => setLanguage('swe'));
+
+        const articuloLista = document.getElementById('articulo-lista');
+        const detalleLinks = document.querySelectorAll('.view-articulo-detalle');
+        const backToListLinks = document.querySelectorAll('.back-to-articulos-lista');
+        const articuloDetalles = document.querySelectorAll('[id^="articulo-detalle-"]');
+
+        detalleLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (articuloLista) articuloLista.style.display = 'none';
+                articuloDetalles.forEach(det => det.style.display = 'none'); 
+
+                const targetDetailId = link.getAttribute('href').substring(1);
+                const targetDetail = document.getElementById(targetDetailId);
+                if (targetDetail) targetDetail.style.display = 'block';
+                window.scrollTo(0,0);
+            });
+        });
+
+        backToListLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                articuloDetalles.forEach(det => det.style.display = 'none');
+                if (articuloLista) articuloLista.style.display = 'block';
+                window.scrollTo(0,0);
+            });
+        });
+        
+        const preferredLang = localStorage.getItem('preferredLanguage') || 'spa';
+        setLanguage(preferredLang);
+
+    });
+    </script>
+
+</body>
+</html>

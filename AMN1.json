@@ -1,8 +1,0 @@
-[
-  {
-    "id": "1678886400000", // Timestamp como ID
-    "name": "Nombre del Usuario",
-    "comment": "Este es un comentario.",
-    "date": "2023-03-15T12:00:00.000Z" // Fecha en formato ISO
-  }
-]
